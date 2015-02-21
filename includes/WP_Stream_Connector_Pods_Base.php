@@ -60,6 +60,9 @@ abstract class WP_Stream_Connector_Pods_Base extends WP_Stream_Connector {
 		 * Note: Stream only supports up to 5 arguments passed via action (2015-02-12)
 		 *
 		 * @since 0.1
+		 *
+		 * @param string $name Connector name/slug
+		 * @param array $actions Connector actions
 		 */
 		static::$actions = apply_filters( static::$name . '_stream_wp_actions', static::$actions );
 
@@ -67,12 +70,18 @@ abstract class WP_Stream_Connector_Pods_Base extends WP_Stream_Connector {
 		 * Filter Stream Context labels
 		 *
 		 * @since 0.1
+		 *
+		 * @param string $name Connector name/slug
+		 * @param array $actions Connector actions
 		 */
 		static::$context_labels = apply_filters( static::$name . '_stream_context_labels', static::$context_labels );
 		/**
 		 * Filter Stream Action labels
 		 *
 		 * @since 0.1
+		 *
+		 * @param string $name Connector name/slug
+		 * @param array $actions Connector actions
 		 */
 		static::$action_labels = apply_filters( static::$name . '_stream_action_labels', static::$action_labels );
 
@@ -129,7 +138,7 @@ abstract class WP_Stream_Connector_Pods_Base extends WP_Stream_Connector {
 			if ( in_array( $action, static::$actions ) ) {
 
 				/**
-				 * Call Stream Log Args
+				 * Call Stream Log args
 				 *
 				 * @since 0.1
 				 *

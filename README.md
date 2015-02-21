@@ -1,4 +1,4 @@
 # pods-stream
 Pods Framework integration with the WP Stream plugin
 
-WARNING: THIS PLUGIN IS CURRENTLY A WORK IN PROGRESS. DO NOT USE THIS PLUGIN IN PRODUCTIN PLEASE!
+Not feature complete yet, currently only tracks changes to individual Pods ACT items.

@@ -66,7 +66,7 @@ class WP_Stream_Connector_Pods_Content extends WP_Stream_Connector_Pods_Base {
 			'pods_api_post_delete_pod_item'
 		);
 
-		self::$connector_label = __( 'Pods Content', 'pods' );
+		self::$connector_label = __( 'Pods Content', 'pods-stream' );
 
 		// Get all ACTs
 		$advanced_content_types = pods_api()->load_pods( array( 'type' => 'pod', 'table_info' => false, 'fields' => false ) );
@@ -77,7 +77,7 @@ class WP_Stream_Connector_Pods_Content extends WP_Stream_Connector_Pods_Base {
 		foreach ( $advanced_content_types as $pod ) {
 			self::$context_labels[ $pod[ 'name' ] ] = $pod[ 'label' ];
 
-			self::$context_singular_labels[ $pod[ 'name' ] ] = __( 'Pod Item', 'pods' );
+			self::$context_singular_labels[ $pod[ 'name' ] ] = __( 'Pod Item', 'pods-stream' );
 
 			if ( ! empty( $pod[ 'options' ][ 'label_singular' ] ) ) {
 				self::$context_singular_labels[ $pod[ 'name' ] ] = $pod[ 'options' ][ 'label_singular' ];
@@ -85,9 +85,9 @@ class WP_Stream_Connector_Pods_Content extends WP_Stream_Connector_Pods_Base {
 		}
 
 		self::$action_labels = array(
-			'created' => __( 'Created', 'pods' ),
-			'updated' => __( 'Updated', 'pods' ),
-			'deleted' => __( 'Deleted', 'pods' )
+			'created' => __( 'Created', 'pods-stream' ),
+			'updated' => __( 'Updated', 'pods-stream' ),
+			'deleted' => __( 'Deleted', 'pods-stream' )
 		);
 
 		parent::register_init();
@@ -109,7 +109,7 @@ class WP_Stream_Connector_Pods_Content extends WP_Stream_Connector_Pods_Base {
 		if ( $record->object_id && 'deleted' != $record->action && isset( self::$context_singular_labels[ $record->context ] ) ) {
 			$link = 'admin.php?page=pods-manage-%s&action=edit&id=%d';
 
-			$text = sprintf( __( 'Edit %s', 'pods' ), self::$context_singular_labels[ $record->context ] );
+			$text = sprintf( __( 'Edit %s', 'pods-stream' ), self::$context_singular_labels[ $record->context ] );
 
 			$links[ $text ] = sprintf( $link, $record->context, $record->object_id );
 		}
@@ -139,11 +139,11 @@ class WP_Stream_Connector_Pods_Content extends WP_Stream_Connector_Pods_Base {
 		}
 
 		// Get save action
-		$action_text = __( 'updated', 'pods' );
+		$action_text = __( 'updated', 'pods-stream' );
 		$action = 'updated';
 
 		if ( $is_new_item ) {
-			$action_text = __( 'created', 'pods' );
+			$action_text = __( 'created', 'pods-stream' );
 			$action = 'created';
 		}
 
@@ -162,7 +162,7 @@ class WP_Stream_Connector_Pods_Content extends WP_Stream_Connector_Pods_Base {
 	 */
 	public static function callback_pods_api_post_delete_pod_item( $params, $pod, $obj = null ) {
 
-		$action_text = __( 'deleted', 'pods' );
+		$action_text = __( 'deleted', 'pods-stream' );
 		$action = 'deleted';
 
 		$id = $params->id;
@@ -181,7 +181,7 @@ class WP_Stream_Connector_Pods_Content extends WP_Stream_Connector_Pods_Base {
 		// Log activity
 		self::log(
 			sprintf(
-				__( '%s #%d %s', 'pods' ),
+				__( '%s #%d %s', 'pods-stream' ),
 				self::$context_singular_labels[ $pod_name ],
 				$item_id,
 				$action_text

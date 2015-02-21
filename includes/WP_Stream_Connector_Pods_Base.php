@@ -54,13 +54,26 @@ abstract class WP_Stream_Connector_Pods_Base extends WP_Stream_Connector {
 	 */
 	public static function register_init() {
 
-		// i18n settings can go here
-
-		// Note: Stream only supports up to 5 arguments passed via action (2015-02-12)
+		/**
+		 * Filter Stream Actions
+		 *
+		 * Note: Stream only supports up to 5 arguments passed via action (2015-02-12)
+		 *
+		 * @since 0.1
+		 */
 		static::$actions = apply_filters( static::$name . '_stream_wp_actions', static::$actions );
 
-		// Filter labels
+		/**
+		 * Filter Stream Context labels
+		 *
+		 * @since 0.1
+		 */
 		static::$context_labels = apply_filters( static::$name . '_stream_context_labels', static::$context_labels );
+		/**
+		 * Filter Stream Action labels
+		 *
+		 * @since 0.1
+		 */
 		static::$action_labels = apply_filters( static::$name . '_stream_action_labels', static::$action_labels );
 
 	}
@@ -114,7 +127,15 @@ abstract class WP_Stream_Connector_Pods_Base extends WP_Stream_Connector {
 			$action = str_replace( 'callback_', '', $name );
 
 			if ( in_array( $action, static::$actions ) ) {
-				// Get log args
+
+				/**
+				 * Call Stream Log Args
+				 *
+				 * @since 0.1
+				 *
+				 * @param array $value
+				 * @param array $args The log args array
+				 */
 				$call_args = apply_filters( static::$name . '_stream_call_args_' . $action, array(), $args );
 
 				// Log activity

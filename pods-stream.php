@@ -42,15 +42,15 @@ function pods_stream_init() {
 	// Check if the Stream Connector Class exists
 	if ( class_exists( 'WP_Stream_Connector' ) ) {
 		if ( ! class_exists( 'WP_Stream_Connector_Pods_Base' ) ) {
-			include_once PODS_STREAM_DIR . 'WP_Stream_Connector_Pods_Base.php';
+			include_once PODS_STREAM_DIR . 'includes/WP_Stream_Connector_Pods_Base.php';
 		}
 
 		if ( ! class_exists( 'WP_Stream_Connector_Pods' ) ) {
-			include_once PODS_STREAM_DIR . 'WP_Stream_Connector_Pods.php';
+			include_once PODS_STREAM_DIR . 'includes/WP_Stream_Connector_Pods.php';
 		}
 
 		if ( ! class_exists( 'WP_Stream_Connector_Pods_Content' ) ) {
-			include_once PODS_STREAM_DIR . 'WP_Stream_Connector_Pods_Content.php';
+			include_once PODS_STREAM_DIR . 'includes/WP_Stream_Connector_Pods_Content.php';
 		}
 	}
 	else {

@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name:     Pods Stream Plugin
+ * Plugin Name:     Pods Stream Connector
  * Plugin URI:      @todo
  * Description:     Pods Framework Stream Connector
  * Version:         1.0.0

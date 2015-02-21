@@ -12,6 +12,7 @@
 
 function pods_stream_include_files() {
 
+	// Check if the Stream Connector Class exists
 	if ( class_exists( 'WP_Stream_Connector' ) ) {
 		if ( ! class_exists( 'WP_Stream_Connector_Pods_Base' ) ) {
 			require ('WP_Stream_Connector_Pods_Base.php');
@@ -24,6 +25,20 @@ function pods_stream_include_files() {
 		if ( ! class_exists( 'WP_Stream_Connector_Pods_Content' ) ) {
 			require ('WP_Stream_Connector_Pods_Content.php');
 		}
+
+	}
+	else {
+		//use the global pagenow so we can tell if we are on plugins admin page
+		global $pagenow;
+		if ( $pagenow == 'plugins.php' ) {
+			?>
+			<div class="error">
+				<p><?php _e( 'You have not installed the WordPress Stream Plugin.', 'pods-stream' ); ?></p>
+			</div>
+		<?php
+
+		}
+
 
 	}
 

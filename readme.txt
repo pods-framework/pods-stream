@@ -4,7 +4,7 @@ Tags: stream, pods
 Donate link: http://podsfoundation.org/donate/
 Requires at least: 3.8
 Tested up to: 4.1.1
-Stable tag: 1.0
+Stable tag: 0.1
 License: GPL v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -31,5 +31,5 @@ OR you can just install it with WordPress by going to Plugins >> Add New >> and 
 1. An example of Pods activity being displayed in Stream
 
 == Changelog ==
-= 1.0 =
+= 0.1 =
 First WPORG release.

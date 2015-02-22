@@ -27,7 +27,9 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 /**
- * @package Pods\Stream
+ * The URL for this plugin.
+ *
+ * @since 0.1.0
  */
 
 define( 'PODS_STREAM_DIR', plugin_dir_path( __FILE__ ) );
@@ -35,7 +37,7 @@ define( 'PODS_STREAM_DIR', plugin_dir_path( __FILE__ ) );
 /**
  * Init Stream integration
  *
- * @since 0.1
+ * @since 0.1.0
  */
 function pods_stream_init() {
 
@@ -73,7 +75,7 @@ add_action( 'init', 'pods_stream_init', 8 );
 /**
  * Load plugin textdomain.
  *
- * @since 0.1
+ * @since 0.1.0
  */
 function myplugin_load_textdomain() {
 	load_plugin_textdomain( 'pods-stream', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
@@ -84,7 +86,7 @@ add_action( 'plugins_loaded', 'myplugin_load_textdomain' );
 /**
  * Check if the right version of Pods is installed
  *
- * @since 0.1
+ * @since 0.1.0
  */
 function pods_stream_admin_notice_pods_min_version_fail() {
 
@@ -120,7 +122,7 @@ add_action( 'admin_notices', 'pods_stream_admin_notice_pods_min_version_fail' );
  *
  * Will only show on the plugins page.
  *
- * @since 0.1
+ * @since 0.1.0
  */
 function pods_stream_admin_notice_pods_not_active() {
 
@@ -150,7 +152,7 @@ add_action( 'admin_notices', 'pods_stream_admin_notice_pods_not_active' );
  *
  * @return array
  *
- * @since 0.1
+ * @since 0.1.0
  */
 function pods_stream_exclude_internal( $post_types ) {
 

@@ -77,10 +77,10 @@ add_action( 'init', 'pods_stream_init', 8 );
  *
  * @since 0.1.0
  */
-function myplugin_load_textdomain() {
+function pods_stream_load_textdomain() {
 	load_plugin_textdomain( 'pods-stream', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 }
-add_action( 'plugins_loaded', 'myplugin_load_textdomain' );
+add_action( 'plugins_loaded', 'pods_stream_load_textdomain' );
 
 
 /**

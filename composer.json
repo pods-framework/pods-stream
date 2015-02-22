@@ -1,0 +1,27 @@
+{
+    "name": "pods-framework/pods-stream",
+    "description": "Integrates with the WordPress Stream plugin to track changes to Pods and content",
+    "type": "wordpress-plugin",
+    "keywords" : [ "pods", "stream" ],
+    "homepage" : "http://pods.io/",
+    "license": "GPL2",
+    "authors": [
+        {
+            "name" : "Scott Kingsley Clark",
+            "email" : "scott@pods.io",
+            "homepage" : "http://scottkclark.com/"
+        },
+        {
+            "author" : "Nikhil Vimal",
+            "homepage": "nik.techvoltz.com"
+        }
+
+    ],
+    "require": {
+        "php" : ">=5.2.4"
+    },
+    "support" : {
+        "issues": "https://github.com/pods-framework/pods-stream/issues",
+        "source": "https://github.com/pods-framework/pods-stream/pulls"
+    }
+}

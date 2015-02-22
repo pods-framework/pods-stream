@@ -41,7 +41,7 @@ define( 'PODS_STREAM_DIR', plugin_dir_path( __FILE__ ) );
  */
 function pods_stream_init() {
 
-	if ( defined( 'PODS_VERSION' ) ) {
+	if ( defined('PODS_VERSION') ) {
 
 		// Check if the Stream Connector Class exists
 		if ( class_exists( 'WP_Stream_Connector' ) ) {

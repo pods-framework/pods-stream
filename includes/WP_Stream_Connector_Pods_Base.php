@@ -9,6 +9,8 @@ abstract class WP_Stream_Connector_Pods_Base extends WP_Stream_Connector {
 	/**
 	 * Connector name/slug
 	 *
+	 * @since 0.1.0
+	 *
 	 * @var string
 	 */
 	public static $name = '';
@@ -16,12 +18,16 @@ abstract class WP_Stream_Connector_Pods_Base extends WP_Stream_Connector {
 	/**
 	 * Connector actions
 	 *
+	 * @since 0.1.0
+	 *
 	 * @var array
 	 */
 	public static $actions = array();
 
 	/**
 	 * Connector label
+	 *
+	 * @since 0.1.0
 	 *
 	 * For i18n you should do this in ::register_init()
 	 *
@@ -32,6 +38,8 @@ abstract class WP_Stream_Connector_Pods_Base extends WP_Stream_Connector {
 	/**
 	 * Connector context labels
 	 *
+	 * @since 0.1.0
+	 *
 	 * For i18n you should do this in ::register_init()
 	 *
 	 * @var array
@@ -40,6 +48,8 @@ abstract class WP_Stream_Connector_Pods_Base extends WP_Stream_Connector {
 
 	/**
 	 * Connector action labels
+	 *
+	 * @since 0.1.0
 	 *
 	 * For i18n you should do this in ::register_init()
 	 *
@@ -50,6 +60,8 @@ abstract class WP_Stream_Connector_Pods_Base extends WP_Stream_Connector {
 	/**
 	 * Register all context hooks
 	 *
+	 * @since 0.1.0
+	 *
 	 * @return void
 	 */
 	public static function register_init() {
@@ -59,7 +71,7 @@ abstract class WP_Stream_Connector_Pods_Base extends WP_Stream_Connector {
 		 *
 		 * Note: Stream only supports up to 5 arguments passed via action (2015-02-12)
 		 *
-		 * @since 0.1
+		 * @since 0.1.0
 		 *
 		 * @param string $name Connector name/slug
 		 * @param array $actions Connector actions
@@ -69,7 +81,7 @@ abstract class WP_Stream_Connector_Pods_Base extends WP_Stream_Connector {
 		/**
 		 * Filter Stream Context labels
 		 *
-		 * @since 0.1
+		 * @since 0.1.0
 		 *
 		 * @param string $name Connector name/slug
 		 * @param array $actions Connector actions
@@ -78,7 +90,7 @@ abstract class WP_Stream_Connector_Pods_Base extends WP_Stream_Connector {
 		/**
 		 * Filter Stream Action labels
 		 *
-		 * @since 0.1
+		 * @since 0.1.0
 		 *
 		 * @param string $name Connector name/slug
 		 * @param array $actions Connector actions
@@ -89,6 +101,8 @@ abstract class WP_Stream_Connector_Pods_Base extends WP_Stream_Connector {
 
 	/**
 	 * Return translated connector label
+	 *
+	 * @since 0.1.0
 	 *
 	 * @return string
 	 */
@@ -101,6 +115,8 @@ abstract class WP_Stream_Connector_Pods_Base extends WP_Stream_Connector {
 	/**
 	 * Return translated context labels
 	 *
+	 * @since 0.1.0
+	 *
 	 * @return array
 	 */
 	public static function get_context_labels() {
@@ -111,6 +127,8 @@ abstract class WP_Stream_Connector_Pods_Base extends WP_Stream_Connector {
 
 	/**
 	 * Return translated action labels
+	 *
+	 * @since 0.1.0
 	 *
 	 * @return array
 	 */
@@ -123,8 +141,12 @@ abstract class WP_Stream_Connector_Pods_Base extends WP_Stream_Connector {
 	/**
 	 * Handle context methods via filter
 	 *
+	 * @since 0.1.0
+	 *
 	 * @param string $name
 	 * @param array $args
+	 *
+	 * @return void|object
 	 */
 	public static function __callStatic( $name, $args ) {
 
@@ -140,7 +162,7 @@ abstract class WP_Stream_Connector_Pods_Base extends WP_Stream_Connector {
 				/**
 				 * Call Stream Log args
 				 *
-				 * @since 0.1
+				 * @since 0.1.0
 				 *
 				 * @param array $value
 				 * @param array $args The log args array
@@ -161,6 +183,8 @@ abstract class WP_Stream_Connector_Pods_Base extends WP_Stream_Connector {
 	/**
 	 * Log handler (to avoid internal notices)
 	 *
+	 * @since 0.1.0
+	 *
 	 * @param  string $message   sprintf-ready error message string
 	 * @param  array  $args      sprintf (and extra) arguments to use
 	 * @param  int    $object_id Target object id
@@ -180,6 +204,8 @@ abstract class WP_Stream_Connector_Pods_Base extends WP_Stream_Connector {
 	/**
 	 * Register this connector for Stream by adding filter
 	 *
+	 * @since 0.1.0
+	 *
 	 * Add this code after including the class file
 	 * to register the class automatically:
 	 *
@@ -197,6 +223,8 @@ abstract class WP_Stream_Connector_Pods_Base extends WP_Stream_Connector {
 
 	/**
 	 * Add this connector to the list of connectors loaded up
+	 *
+	 * @since 0.1.0
 	 *
 	 * @filter wp_stream_connectors
 	 *

@@ -7,6 +7,8 @@ class WP_Stream_Connector_Pods_Content extends WP_Stream_Connector_Pods_Base {
 	/**
 	 * Connector name/slug
 	 *
+	 * @since 0.1.0
+	 *
 	 * @var string
 	 */
 	public static $name = 'pods-content';
@@ -14,12 +16,16 @@ class WP_Stream_Connector_Pods_Content extends WP_Stream_Connector_Pods_Base {
 	/**
 	 * Connector actions
 	 *
+	 * @since 0.1.0
+	 *
 	 * @var array
 	 */
 	public static $actions = array();
 
 	/**
 	 * Connector label
+	 *
+	 * @since 0.1.0
 	 *
 	 * For i18n you should do this in ::register_init()
 	 *
@@ -30,6 +36,8 @@ class WP_Stream_Connector_Pods_Content extends WP_Stream_Connector_Pods_Base {
 	/**
 	 * Connector context labels
 	 *
+	 * @since 0.1.0
+	 *
 	 * For i18n you should do this in ::register_init()
 	 *
 	 * @var array
@@ -38,6 +46,8 @@ class WP_Stream_Connector_Pods_Content extends WP_Stream_Connector_Pods_Base {
 
 	/**
 	 * Connector action labels
+	 *
+	 * @since 0.1.0
 	 *
 	 * For i18n you should do this in ::register_init()
 	 *
@@ -48,6 +58,8 @@ class WP_Stream_Connector_Pods_Content extends WP_Stream_Connector_Pods_Base {
 	/**
 	 * Connector context singular labels
 	 *
+	 * @since 0.1.0
+	 *
 	 * For i18n you should do this in ::register_init()
 	 *
 	 * @var array
@@ -56,6 +68,8 @@ class WP_Stream_Connector_Pods_Content extends WP_Stream_Connector_Pods_Base {
 
 	/**
 	 * Register all context hooks
+	 *
+	 * @since 0.1.0
 	 *
 	 * @return void
 	 */
@@ -97,6 +111,8 @@ class WP_Stream_Connector_Pods_Content extends WP_Stream_Connector_Pods_Base {
 	/**
 	 * Add action links to Stream drop row in admin list screen
 	 *
+	 * @since 0.1.0
+	 *
 	 * @filter wp_stream_action_links_{connector}
 	 *
 	 * @param  array  $links     Previous links registered
@@ -120,6 +136,8 @@ class WP_Stream_Connector_Pods_Content extends WP_Stream_Connector_Pods_Base {
 
 	/**
 	 * Stream ACT post-save
+	 *
+	 * @since 0.1.0
 	 *
 	 * @param array $pieces PodsAPI::save_pod_item $pieces
 	 * @param boolean $is_new_item Whether item was just now created
@@ -154,6 +172,8 @@ class WP_Stream_Connector_Pods_Content extends WP_Stream_Connector_Pods_Base {
 	/**
 	 * Stream ACT post-delete
 	 *
+	 * @since 0.1.0
+	 *
 	 * @param object $params PodsAPI::delete_pod_item $params
 	 * @param array $pod Pod data
 	 * @param PodsAPI $obj PodsAPI object
@@ -171,7 +191,20 @@ class WP_Stream_Connector_Pods_Content extends WP_Stream_Connector_Pods_Base {
 
 	}
 
+	/**
+	 * Write action to log/
+	 *
+	 * @since 0.1.0
+	 *
+	 * @param $action
+	 * @param $pod_name
+	 * @param $item_id
+	 * @param $action_text
+	 * @param array $meta
+	 */
 	public static function log_action( $action, $pod_name, $item_id, $action_text, $meta = array() ) {
+		//make return since self::log() is commented out.
+		return;
 
 		// Restrict to ACTs
 		if ( ! isset( self::$context_singular_labels[ $pod_name ] ) ) {

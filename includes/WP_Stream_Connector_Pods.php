@@ -13,6 +13,8 @@ class WP_Stream_Connector_Pods extends WP_Stream_Connector_Pods_Base {
 	/**
 	 * Connector name/slug
 	 *
+	 * @since 0.1.0
+	 *
 	 * @var string
 	 */
 	public static $name = 'pods';
@@ -20,12 +22,16 @@ class WP_Stream_Connector_Pods extends WP_Stream_Connector_Pods_Base {
 	/**
 	 * Connector actions
 	 *
+	 * @since 0.1.0
+	 *
 	 * @var array
 	 */
 	public static $actions = array();
 
 	/**
 	 * Connector label
+	 *
+	 * @since 0.1.0
 	 *
 	 * For i18n you should do this in ::register_init()
 	 *
@@ -36,6 +42,8 @@ class WP_Stream_Connector_Pods extends WP_Stream_Connector_Pods_Base {
 	/**
 	 * Connector context labels
 	 *
+	 * @since 0.1.0
+	 *
 	 * For i18n you should do this in ::register_init()
 	 *
 	 * @var array
@@ -44,6 +52,8 @@ class WP_Stream_Connector_Pods extends WP_Stream_Connector_Pods_Base {
 
 	/**
 	 * Connector action labels
+	 *
+	 * @since 0.1.0
 	 *
 	 * For i18n you should do this in ::register_init()
 	 *
@@ -54,12 +64,16 @@ class WP_Stream_Connector_Pods extends WP_Stream_Connector_Pods_Base {
 	/**
 	 * Holds tracked plugin minimum version required
 	 *
+	 * @since 0.1.0
+	 *
 	 * @const string
 	 */
 	const PLUGIN_MIN_VERSION = '2.0.0';
 
 	/**
 	 * Check if plugin dependencies are satisfied and add an admin notice if not
+	 *
+	 * @since 0.1.0
 	 *
 	 * @return bool
 	 */
@@ -79,14 +93,12 @@ class WP_Stream_Connector_Pods extends WP_Stream_Connector_Pods_Base {
 	/**
 	 * Register all context hooks
 	 *
+	 * @since 0.1.0
+	 *
 	 * @return void
 	 */
 	public static function register_init() {
-
-
-
 		// Add Pods-specific data that needs to be built via PHP -- like i18n strings
-
 		self::$connector_label = __( 'Pods', 'pods' );
 
 		self::$context_labels = array(
@@ -111,6 +123,8 @@ class WP_Stream_Connector_Pods extends WP_Stream_Connector_Pods_Base {
 
 	/**
 	 * Add action links to Stream drop row in admin list screen
+	 *
+	 * @since 0.1.0
 	 *
 	 * @filter wp_stream_action_links_{connector}
 	 *

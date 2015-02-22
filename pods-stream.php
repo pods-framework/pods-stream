@@ -41,31 +41,33 @@ define( 'PODS_STREAM_DIR', plugin_dir_path( __FILE__ ) );
  */
 function pods_stream_init() {
 
-	// Check if the Stream Connector Class exists
-	if ( class_exists( 'WP_Stream_Connector' ) ) {
-		if ( ! class_exists( 'WP_Stream_Connector_Pods_Base' ) ) {
-			include_once PODS_STREAM_DIR . 'includes/WP_Stream_Connector_Pods_Base.php';
-		}
+	if ( defined( 'PODS_VERSION' ) ) {
 
-		if ( ! class_exists( 'WP_Stream_Connector_Pods' ) ) {
-			include_once PODS_STREAM_DIR . 'includes/WP_Stream_Connector_Pods.php';
-		}
+		// Check if the Stream Connector Class exists
+		if ( class_exists( 'WP_Stream_Connector' ) ) {
+			if ( ! class_exists( 'WP_Stream_Connector_Pods_Base' ) ) {
+				include_once PODS_STREAM_DIR . 'includes/WP_Stream_Connector_Pods_Base.php';
+			}
 
-		if ( ! class_exists( 'WP_Stream_Connector_Pods_Content' ) ) {
-			include_once PODS_STREAM_DIR . 'includes/WP_Stream_Connector_Pods_Content.php';
-		}
-	}
-	else {
-		//use the global pagenow so we can tell if we are on plugins admin page
-		global $pagenow;
+			if ( ! class_exists( 'WP_Stream_Connector_Pods' ) ) {
+				include_once PODS_STREAM_DIR . 'includes/WP_Stream_Connector_Pods.php';
+			}
 
-		if ( $pagenow == 'plugins.php' ) {
-	?>
-		<div class="error">
-			<p><?php _e( 'Pods Stream Connector requires the WordPress Stream plugin be activated to work.', 'pods-stream' ); ?></p>
-		</div>
-	<?php
+			if ( ! class_exists( 'WP_Stream_Connector_Pods_Content' ) ) {
+				include_once PODS_STREAM_DIR . 'includes/WP_Stream_Connector_Pods_Content.php';
+			}
+		} else {
+			//use the global pagenow so we can tell if we are on plugins admin page
+			global $pagenow;
 
+			if ( $pagenow == 'plugins.php' ) {
+				?>
+				<div class="error">
+					<p><?php _e( 'Pods Stream Connector requires the WordPress Stream plugin be activated to work.', 'pods-stream' ); ?></p>
+				</div>
+			<?php
+
+			}
 		}
 	}
 

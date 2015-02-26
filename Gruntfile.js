@@ -26,6 +26,7 @@ module.exports = function (grunt) {
 		clean: {
 			post_build: [
 				'.build',
+				'release/<%= pkg.name %>-<%= pkg.version %>.zip',
 				'release/<%= pkg.name %>',
 				'release/build/<%= pkg.version %>',
 				'release/build/'

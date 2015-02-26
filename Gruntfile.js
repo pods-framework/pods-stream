@@ -80,7 +80,7 @@ module.exports = function (grunt) {
 					allowEmpty: true
 				},
 				files: {
-					src: [ 'acknowledge-me.php', 'readme.txt', 'README.md', 'package.json' ]
+					src: [ 'pods-stream.php', 'readme.txt', 'README.md', 'package.json' ]
 				}
 			}
 		},
@@ -95,7 +95,7 @@ module.exports = function (grunt) {
 		},
 		replace: {
 			version: {
-				src: [ 'acknowledge-me.php', 'readme.txt', 'README.md' ],
+				src: [ 'pods-stream.php', 'readme.txt', 'README.md' ],
 				overwrite: true,
 				replacements: [{
 					from: "<%= pkg.last_version %>",
@@ -108,7 +108,7 @@ module.exports = function (grunt) {
 				repos: [
 					{
 						path: [ 'release' ],
-						repo: 'http://plugins.svn.wordpress.org/acknowledge-me'
+						repo: 'http://plugins.svn.wordpress.org/pods-stream'
 					}
 				]
 			}
@@ -120,7 +120,7 @@ module.exports = function (grunt) {
 			},
 			main: {
 				src: 'release/<%= pkg.name %>',
-				dest: 'http://plugins.svn.wordpress.org/acknowledge-me',
+				dest: 'http://plugins.svn.wordpress.org/pods-stream',
 				tmp: './.build'
 			}
 		}

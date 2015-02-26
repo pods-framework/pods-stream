@@ -4,7 +4,7 @@ Tags: stream, pods
 Donate link: http://podsfoundation.org/donate/
 Requires at least: 3.8
 Tested up to: 4.1.1
-Stable tag: 0.1
+Stable tag: 0.1.0
 License: GPL v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 

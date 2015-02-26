@@ -3,7 +3,7 @@
 Plugin Name: Pods Stream Connector
 Plugin URI: http://pods.io/
 Description: Integrates with the WordPress Stream plugin to track changes to Pods and content
-Version: 0.1
+Version: 0.1.0
 Author: Pods Framework Team, Nikhil Vimal
 Author URI: http://pods.io/about/
 Text Domain: pods-stream

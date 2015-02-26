@@ -1,8 +1,8 @@
 {
-  "name": "acknowledge-me",
-  "version": "0.2.2",
-  "last_version": "0.2.1",
-  "repository": "https://github.com/pods-framework/acknowledge-me",
+  "name": "pods-stream",
+  "version": "0.1.0",
+  "last_version": "0.0.1",
+  "repository": "https://github.com/pods-framework/pods-stream",
   "devDependencies": {
     "grunt": "^0.4.5",
     "grunt-contrib-clean": "^0.6.0",

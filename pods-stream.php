@@ -44,7 +44,7 @@ function pods_stream_init() {
 	if ( defined('PODS_VERSION') ) {
 
 		// Check if the Stream Connector Class exists
-		if ( class_exists( 'WP_Stream_Connector' ) ) {
+		if ( class_exists( '\WP_Stream\Connector' ) ) {
 			if ( ! class_exists( 'WP_Stream_Connector_Pods_Base' ) ) {
 				include_once PODS_STREAM_DIR . 'includes/WP_Stream_Connector_Pods_Base.php';
 			}

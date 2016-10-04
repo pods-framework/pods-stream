@@ -4,7 +4,9 @@
  *
  * This class can be extended by other classes to generalize more functionality
  */
-abstract class WP_Stream_Connector_Pods_Base extends WP_Stream_Connector {
+abstract class WP_Stream_Connector_Pods_Base extends \WP_Stream\Connector {
+
+	public static $instance;
 
 	/**
 	 * Connector name/slug
@@ -13,7 +15,7 @@ abstract class WP_Stream_Connector_Pods_Base extends WP_Stream_Connector {
 	 *
 	 * @var string
 	 */
-	public static $name = '';
+	public $name = '';
 
 	/**
 	 * Connector actions
@@ -22,49 +24,47 @@ abstract class WP_Stream_Connector_Pods_Base extends WP_Stream_Connector {
 	 *
 	 * @var array
 	 */
-	public static $actions = array();
+	public $actions = array();
 
 	/**
 	 * Connector label
 	 *
-	 * @since 0.1.0
-	 *
 	 * For i18n you should do this in ::register_init()
 	 *
+	 * @since 0.1.0
 	 * @var string
 	 */
-	public static $connector_label = '';
+	public $connector_label = '';
 
 	/**
 	 * Connector context labels
 	 *
+	 * For i18n you should do this in register_init()
+	 *
 	 * @since 0.1.0
-	 *
-	 * For i18n you should do this in ::register_init()
-	 *
 	 * @var array
 	 */
-	public static $context_labels = array();
+	public $context_labels = array();
 
 	/**
 	 * Connector action labels
 	 *
+	 * For i18n you should do this in register_init()
+	 *
 	 * @since 0.1.0
-	 *
-	 * For i18n you should do this in ::register_init()
-	 *
 	 * @var array
 	 */
-	public static $action_labels = array();
+	public $action_labels = array();
 
 	/**
 	 * Register all context hooks
 	 *
 	 * @since 0.1.0
-	 *
 	 * @return void
 	 */
-	public static function register_init() {
+	public function register_init() {
+
+		// i18n settings can go here
 
 		/**
 		 * Filter Stream Actions
@@ -73,29 +73,30 @@ abstract class WP_Stream_Connector_Pods_Base extends WP_Stream_Connector {
 		 *
 		 * @since 0.1.0
 		 *
-		 * @param string $name Connector name/slug
-		 * @param array $actions Connector actions
+		 * @param string $name    Connector name/slug
+		 * @param array  $actions Connector actions
 		 */
-		static::$actions = apply_filters( static::$name . '_stream_wp_actions', static::$actions );
+		$this->actions = apply_filters( $this->name . '_stream_wp_actions', $this->actions );
 
 		/**
 		 * Filter Stream Context labels
 		 *
 		 * @since 0.1.0
 		 *
-		 * @param string $name Connector name/slug
-		 * @param array $actions Connector actions
+		 * @param string $name    Connector name/slug
+		 * @param array  $actions Connector actions
 		 */
-		static::$context_labels = apply_filters( static::$name . '_stream_context_labels', static::$context_labels );
+		$this->context_labels = apply_filters( $this->name . '_stream_context_labels', $this->context_labels );
+
 		/**
 		 * Filter Stream Action labels
 		 *
 		 * @since 0.1.0
 		 *
-		 * @param string $name Connector name/slug
-		 * @param array $actions Connector actions
+		 * @param string $name    Connector name/slug
+		 * @param array  $actions Connector actions
 		 */
-		static::$action_labels = apply_filters( static::$name . '_stream_action_labels', static::$action_labels );
+		$this->action_labels = apply_filters( $this->name . '_stream_action_labels', $this->action_labels );
 
 	}
 
@@ -106,9 +107,9 @@ abstract class WP_Stream_Connector_Pods_Base extends WP_Stream_Connector {
 	 *
 	 * @return string
 	 */
-	public static function get_label() {
+	public function get_label() {
 
-		return static::$connector_label;
+		return $this->connector_label;
 
 	}
 
@@ -119,9 +120,9 @@ abstract class WP_Stream_Connector_Pods_Base extends WP_Stream_Connector {
 	 *
 	 * @return array
 	 */
-	public static function get_context_labels() {
+	public function get_context_labels() {
 
-		return static::$context_labels;
+		return $this->context_labels;
 
 	}
 
@@ -132,9 +133,9 @@ abstract class WP_Stream_Connector_Pods_Base extends WP_Stream_Connector {
 	 *
 	 * @return array
 	 */
-	public static function get_action_labels() {
+	public function get_action_labels() {
 
-		return static::$action_labels;
+		return $this->action_labels;
 
 	}
 
@@ -154,24 +155,58 @@ abstract class WP_Stream_Connector_Pods_Base extends WP_Stream_Connector {
 		if ( 0 === strpos( $name, 'callback_' ) ) {
 			$class = get_called_class();
 
+			/**
+			 * @var WP_Stream_Connector_Pods_Base $object
+			 */
+			$object = $class::get_instance();
+
 			// Get action from callback method name
 			$action = str_replace( 'callback_', '', $name );
 
-			if ( in_array( $action, static::$actions ) ) {
-
+			if ( in_array( $action, $object->actions ) ) {
 				/**
 				 * Call Stream Log args
 				 *
 				 * @since 0.1.0
 				 *
-				 * @param array $value
-				 * @param array $args The log args array
+				 * @param array $call_args Call args array
+				 * @param array $args      Log args array
 				 */
-				$call_args = apply_filters( static::$name . '_stream_call_args_' . $action, array(), $args );
+				$call_args = apply_filters( $object->name . '_stream_call_args_' . $action, array(), $args );
 
 				// Log activity
 				if ( ! empty( $call_args ) ) {
-					call_user_func_array( array( $class, 'log' ), $call_args );
+					call_user_func_array( array( $object, 'log' ), $call_args );
+				}
+			}
+		}
+
+		return null;
+
+	}
+
+	/**
+	 * Handle context methods via filter
+	 *
+	 * @since 0.2.0
+	 *
+	 * @param string $name
+	 * @param array $args
+	 */
+	public function __call( $name, $args ) {
+
+		// Callbacks
+		if ( 0 === strpos( $name, 'callback_' ) ) {
+			// Get action from callback method name
+			$action = str_replace( 'callback_', '', $name );
+
+			if ( in_array( $action, $this->actions ) ) {
+				// Get log args
+				$call_args = apply_filters( $this->name . '_stream_call_args_' . $action, array(), $args );
+
+				// Log activity
+				if ( ! empty( $call_args ) ) {
+					call_user_func_array( array( $this, 'log' ), $call_args );
 				}
 			}
 		}
@@ -194,7 +229,7 @@ abstract class WP_Stream_Connector_Pods_Base extends WP_Stream_Connector {
 	 *
 	 * @return bool
 	 */
-	/*public static function log( $message, $args, $object_id, $context, $action, $user_id = null ) {
+	/*public function log( $message, $args, $object_id, $context, $action, $user_id = null ) {
 
 		// Log to parent class so it picks up get_called_class properly to map to this connector
 		return parent::log( $message, $args, $object_id, $context, $action, $user_id );
@@ -215,9 +250,15 @@ abstract class WP_Stream_Connector_Pods_Base extends WP_Stream_Connector {
 
 		$class = get_called_class();
 
-		$class::register_init();
+		/**
+		 * @var WP_Stream_Connector_Pods_Base $object
+		 */
+		$object = $class::get_instance();
 
-		add_filter( 'wp_stream_connectors', array( $class, '_register_stream_connector' ) );
+		$object->register_init();
+
+		add_filter( 'wp_stream_connectors', array( $object, '_register_stream_connector' ) );
+		add_filter( 'wp_stream_log_data', array( $object, '_filter_stream_log_data' ) );
 
 	}
 
@@ -234,13 +275,67 @@ abstract class WP_Stream_Connector_Pods_Base extends WP_Stream_Connector {
 	 *
 	 * @private
 	 */
-	public static function _register_stream_connector( $classes ) {
+	public function _register_stream_connector( $classes ) {
+
+		$classes[] = $this;
+
+		return $classes;
+
+	}
+
+	/**
+	 * Add this connector properly to log data
+	 *
+	 * @since 0.2.0
+	 *
+	 * @filter wp_stream_connectors
+	 *
+	 * @param array $data Array of log data
+	 *
+	 * @return array
+	 *
+	 * @private
+	 */
+	public function _filter_stream_log_data( $data ) {
+
+		// Data values:
+		// 'connector', 'message', 'args', 'object_id', 'context', 'action', 'user_id'
 
 		$class = get_called_class();
 
-		$classes[] = $class;
+		$connector = str_replace( 'Connector_', '', $class );
 
-		return $classes;
+		$data['connector'] = str_replace( $connector, $this->name, $data['connector'] );
+
+		return $data;
+
+	}
+
+	/**
+	 * Private constructor
+	 *
+	 * @since 0.2.0
+	 */
+	private function __construct() {
+
+		// Nope
+
+	}
+
+	/**
+	 * Get instance
+	 *
+	 * @since 0.2.0
+	 */
+	public static function get_instance() {
+
+		$class = get_called_class();
+
+		if ( empty( static::$instance ) || ! is_a( static::$instance, $class ) ) {
+			static::$instance = new $class;
+		}
+
+		return static::$instance;
 
 	}
 

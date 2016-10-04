@@ -11,7 +11,7 @@ class WP_Stream_Connector_Pods_Content extends WP_Stream_Connector_Pods_Base {
 	 *
 	 * @var string
 	 */
-	public static $name = 'pods-content';
+	public $name = 'pods-content';
 
 	/**
 	 * Connector actions
@@ -20,7 +20,7 @@ class WP_Stream_Connector_Pods_Content extends WP_Stream_Connector_Pods_Base {
 	 *
 	 * @var array
 	 */
-	public static $actions = array();
+	public $actions = array();
 
 	/**
 	 * Connector label
@@ -31,7 +31,7 @@ class WP_Stream_Connector_Pods_Content extends WP_Stream_Connector_Pods_Base {
 	 *
 	 * @var string
 	 */
-	public static $connector_label = '';
+	public $connector_label = '';
 
 	/**
 	 * Connector context labels
@@ -42,7 +42,7 @@ class WP_Stream_Connector_Pods_Content extends WP_Stream_Connector_Pods_Base {
 	 *
 	 * @var array
 	 */
-	public static $context_labels = array();
+	public $context_labels = array();
 
 	/**
 	 * Connector action labels
@@ -53,7 +53,7 @@ class WP_Stream_Connector_Pods_Content extends WP_Stream_Connector_Pods_Base {
 	 *
 	 * @var array
 	 */
-	public static $action_labels = array();
+	public $action_labels = array();
 
 	/**
 	 * Connector context singular labels
@@ -64,7 +64,7 @@ class WP_Stream_Connector_Pods_Content extends WP_Stream_Connector_Pods_Base {
 	 *
 	 * @var array
 	 */
-	public static $context_singular_labels = array();
+	public $context_singular_labels = array();
 
 	/**
 	 * Register all context hooks
@@ -73,35 +73,35 @@ class WP_Stream_Connector_Pods_Content extends WP_Stream_Connector_Pods_Base {
 	 *
 	 * @return void
 	 */
-	public static function register_init() {
+	public function register_init() {
 
-		self::$actions = array(
+		$this->actions = array(
 			'pods_api_post_save_pod_item',
 			'pods_api_post_delete_pod_item'
 		);
 
-		self::$connector_label = __( 'Pods Content', 'pods-stream' );
+		$this->connector_label = __( 'Pods Content', 'pods' );
 
 		// Get all ACTs
 		$advanced_content_types = pods_api()->load_pods( array( 'type' => 'pod', 'table_info' => false, 'fields' => false ) );
 
 		// Add Context labels
-		self::$context_labels = array();
+		$this->context_labels = array();
 
 		foreach ( $advanced_content_types as $pod ) {
-			self::$context_labels[ $pod[ 'name' ] ] = $pod[ 'label' ];
+			$this->context_labels[ $pod[ 'name' ] ] = $pod[ 'label' ];
 
-			self::$context_singular_labels[ $pod[ 'name' ] ] = __( 'Pod Item', 'pods-stream' );
+			$this->context_singular_labels[ $pod[ 'name' ] ] = __( 'Pod Item', 'pods' );
 
 			if ( ! empty( $pod[ 'options' ][ 'label_singular' ] ) ) {
-				self::$context_singular_labels[ $pod[ 'name' ] ] = $pod[ 'options' ][ 'label_singular' ];
+				$this->context_singular_labels[ $pod[ 'name' ] ] = $pod[ 'options' ][ 'label_singular' ];
 			}
 		}
 
-		self::$action_labels = array(
-			'created' => __( 'Created', 'pods-stream' ),
-			'updated' => __( 'Updated', 'pods-stream' ),
-			'deleted' => __( 'Deleted', 'pods-stream' )
+		$this->action_labels = array(
+			'created' => __( 'Created', 'pods' ),
+			'updated' => __( 'Updated', 'pods' ),
+			'deleted' => __( 'Deleted', 'pods' )
 		);
 
 		parent::register_init();
@@ -120,12 +120,12 @@ class WP_Stream_Connector_Pods_Content extends WP_Stream_Connector_Pods_Base {
 	 *
 	 * @return array             Action links
 	 */
-	public static function action_links( $links, $record ) {
+	public function action_links( $links, $record ) {
 
-		if ( $record->object_id && 'deleted' != $record->action && isset( self::$context_singular_labels[ $record->context ] ) ) {
+		if ( $record->object_id && 'deleted' != $record->action && isset( $this->context_singular_labels[ $record->context ] ) ) {
 			$link = 'admin.php?page=pods-manage-%s&action=edit&id=%d';
 
-			$text = sprintf( __( 'Edit %s', 'pods-stream' ), self::$context_singular_labels[ $record->context ] );
+			$text = sprintf( __( 'Edit %s', 'pods' ), $this->context_singular_labels[ $record->context ] );
 
 			$links[ $text ] = sprintf( $link, $record->context, $record->object_id );
 		}
@@ -146,26 +146,26 @@ class WP_Stream_Connector_Pods_Content extends WP_Stream_Connector_Pods_Base {
 	 *
 	 * @see PodsAPI::save_pod_item
 	 */
-	public static function callback_pods_api_post_save_pod_item( $pieces, $is_new_item, $id, $obj = null ) {
+	public function callback_pods_api_post_save_pod_item( $pieces, $is_new_item, $id, $obj = null ) {
 
 		// Get the pod
 		$pod = $pieces[ 'pod' ];
 
 		// Restrict to ACTs
-		if ( ! isset( self::$context_singular_labels[ $pod[ 'name' ] ] ) ) {
+		if ( ! isset( $this->context_singular_labels[ $pod[ 'name' ] ] ) ) {
 			return;
 		}
 
 		// Get save action
-		$action_text = __( 'updated', 'pods-stream' );
+		$action_text = __( 'updated', 'pods' );
 		$action = 'updated';
 
 		if ( $is_new_item ) {
-			$action_text = __( 'created', 'pods-stream' );
+			$action_text = __( 'created', 'pods' );
 			$action = 'created';
 		}
 
-		self::log_action( $action, $pod[ 'name' ], $id, $action_text );
+		$this->log_action( $action, $pod[ 'name' ], $id, $action_text );
 
 	}
 
@@ -180,14 +180,14 @@ class WP_Stream_Connector_Pods_Content extends WP_Stream_Connector_Pods_Base {
 	 *
 	 * @see PodsAPI::delete_pod_item
 	 */
-	public static function callback_pods_api_post_delete_pod_item( $params, $pod, $obj = null ) {
+	public function callback_pods_api_post_delete_pod_item( $params, $pod, $obj = null ) {
 
 		$action_text = __( 'deleted', 'pods-stream' );
 		$action = 'deleted';
 
 		$id = $params->id;
 
-		self::log_action( $action, $pod[ 'name' ], $id, $action_text );
+		$this->log_action( $action, $pod[ 'name' ], $id, $action_text );
 
 	}
 
@@ -202,20 +202,18 @@ class WP_Stream_Connector_Pods_Content extends WP_Stream_Connector_Pods_Base {
 	 * @param $action_text
 	 * @param array $meta
 	 */
-	public static function log_action( $action, $pod_name, $item_id, $action_text, $meta = array() ) {
-		//make return since self::log() is commented out.
-		return;
+	public function log_action( $action, $pod_name, $item_id, $action_text, $meta = array() ) {
 
 		// Restrict to ACTs
-		if ( ! isset( self::$context_singular_labels[ $pod_name ] ) ) {
-			return;
+		if ( ! isset( $this->context_singular_labels[ $pod_name ] ) ) {
+			return false;
 		}
 
 		// Log activity
-		self::log(
+		return $this->log(
 			sprintf(
-				__( '%s #%d %s', 'pods-stream' ),
-				self::$context_singular_labels[ $pod_name ],
+				_x( '%s #%d %s', 'Activity log message', 'pods-stream' ),
+				$this->context_singular_labels[ $pod_name ],
 				$item_id,
 				$action_text
 			),

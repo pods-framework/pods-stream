@@ -56,6 +56,8 @@ function pods_stream_init() {
 			if ( ! class_exists( 'WP_Stream_Connector_Pods_Content' ) ) {
 				include_once PODS_STREAM_DIR . 'includes/WP_Stream_Connector_Pods_Content.php';
 			}
+
+			do_action( 'pods_stream_init' );
 		} else {
 			//use the global pagenow so we can tell if we are on plugins admin page
 			global $pagenow;

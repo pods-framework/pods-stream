@@ -102,10 +102,10 @@ class WP_Stream_Connector_Pods extends WP_Stream_Connector_Pods_Base {
 		$this->connector_label = __( 'Pods', 'pods-stream' );
 
 		$this->context_labels = array(
-			'pod'      => __( 'Pod', 'pods-stream' ),
-			'field'    => __( 'Pod Field', 'pods-stream' ),
-			'group'    => __( 'Pod Group', 'pods-stream' ),
-			'settings' => __( 'Settings', 'pods-stream' )
+			'pods-pod'      => __( 'Pod', 'pods-stream' ),
+			'pods-field'    => __( 'Pod Field', 'pods-stream' ),
+			'pods-group'    => __( 'Pod Group', 'pods-stream' ),
+			'pods-settings' => __( 'Settings', 'pods-stream' )
 		);
 
 		$this->action_labels = array(
@@ -135,13 +135,13 @@ class WP_Stream_Connector_Pods extends WP_Stream_Connector_Pods_Base {
 	public function action_links( $links, $record ) {
 
 		if ( $record->object_id && 'deleted' != $record->action ) {
-			if ( 'pod' === $record->context ) {
+			if ( 'pods-pod' === $record->context ) {
 				$link = 'admin.php?page=pods&action=edit&id=%d';
 
 				$pod_id = $record->object_id;
 
 				$links[ __( 'Edit Pod', 'pods-stream' ) ] = sprintf( $link, $pod_id );
-			} elseif ( 'field' === $record->context ) {
+			} elseif ( 'pods-field' === $record->context ) {
 				// @todo update with Group action / ID
 				$link = 'admin.php?page=pods&action=edit&id=%d';
 
@@ -150,7 +150,7 @@ class WP_Stream_Connector_Pods extends WP_Stream_Connector_Pods_Base {
 				$group_id = $record->stream_meta->group_id;
 
 				$links[ __( 'Edit Pod', 'pods-stream' ) ] = sprintf( $link, $pod_id, $group_id );
-			} elseif ( 'group' === $record->context ) {
+			} elseif ( 'pods-group' === $record->context ) {
 				// @todo update with Group action / ID
 				$link = 'admin.php?page=pods&action=edit&id=%d';
 
@@ -160,7 +160,7 @@ class WP_Stream_Connector_Pods extends WP_Stream_Connector_Pods_Base {
 
 				$links[ __( 'Edit Pod Group', 'pods-stream' ) ] = sprintf( $link, $pod_id, $group_id );
 			}
-		} elseif ( 'settings' === $record->context ) {
+		} elseif ( 'pods-settings' === $record->context ) {
 			$links[ __( 'Edit Settings', 'pods-stream' ) ] = 'admin.php?page=pods-settings';
 		}
 

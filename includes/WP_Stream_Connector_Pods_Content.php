@@ -89,12 +89,12 @@ class WP_Stream_Connector_Pods_Content extends WP_Stream_Connector_Pods_Base {
 		$this->context_labels = array();
 
 		foreach ( $advanced_content_types as $pod ) {
-			$this->context_labels[ $pod[ 'name' ] ] = $pod[ 'label' ];
+			$this->context_labels[ 'pod-' . $pod[ 'name' ] ] = $pod[ 'label' ];
 
-			$this->context_singular_labels[ $pod[ 'name' ] ] = __( 'Pod Item', 'pods' );
+			$this->context_singular_labels[ 'pod-' . $pod[ 'name' ] ] = __( 'Pod Item', 'pods' );
 
 			if ( ! empty( $pod[ 'options' ][ 'label_singular' ] ) ) {
-				$this->context_singular_labels[ $pod[ 'name' ] ] = $pod[ 'options' ][ 'label_singular' ];
+				$this->context_singular_labels[ 'pod-' . $pod[ 'name' ] ] = $pod[ 'options' ][ 'label_singular' ];
 			}
 		}
 
@@ -127,7 +127,7 @@ class WP_Stream_Connector_Pods_Content extends WP_Stream_Connector_Pods_Base {
 
 			$text = sprintf( __( 'Edit %s', 'pods' ), $this->context_singular_labels[ $record->context ] );
 
-			$links[ $text ] = sprintf( $link, $record->context, $record->object_id );
+			$links[ $text ] = sprintf( $link, substr( $record->context, 4 ), $record->object_id );
 		}
 
 		return $links;
@@ -152,7 +152,7 @@ class WP_Stream_Connector_Pods_Content extends WP_Stream_Connector_Pods_Base {
 		$pod = $pieces[ 'pod' ];
 
 		// Restrict to ACTs
-		if ( ! isset( $this->context_singular_labels[ $pod[ 'name' ] ] ) ) {
+		if ( ! isset( $this->context_singular_labels[ 'pod-' . $pod[ 'name' ] ] ) ) {
 			return;
 		}
 
@@ -205,7 +205,7 @@ class WP_Stream_Connector_Pods_Content extends WP_Stream_Connector_Pods_Base {
 	public function log_action( $action, $pod_name, $item_id, $action_text, $meta = array() ) {
 
 		// Restrict to ACTs
-		if ( ! isset( $this->context_singular_labels[ $pod_name ] ) ) {
+		if ( ! isset( $this->context_singular_labels[ 'pod-' . $pod_name ] ) ) {
 			return false;
 		}
 
@@ -213,13 +213,13 @@ class WP_Stream_Connector_Pods_Content extends WP_Stream_Connector_Pods_Base {
 		return $this->log(
 			sprintf(
 				_x( '%s #%d %s', 'Activity log message', 'pods-stream' ),
-				$this->context_singular_labels[ $pod_name ],
+				$this->context_singular_labels[ 'pod-' . $pod_name ],
 				$item_id,
 				$action_text
 			),
 			$meta,
 			$item_id,
-			$pod_name,
+			'pod-' . $pod_name,
 			$action
 		);
 

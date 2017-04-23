@@ -31,8 +31,8 @@ OR you can just install it with WordPress by going to Plugins >> Add New >> and 
 1. An example of Pods activity being displayed in Stream
 
 == Changelog ==
-= 0.2 =
-* Fixed: Added compatibility for Stream 3.0+
+= 0.2 - October 6th, 2016 =
+* Fixed: Added compatibility fixes to support Stream 3.0+ which will now be required
 
 = 0.1 =
 * First WPORG release.

@@ -1,10 +1,10 @@
 === Pods Stream Connector ===
 Contributors: sc0ttkclark, nikv
 Tags: stream, pods
-Donate link: http://podsfoundation.org/donate/
+Donate link: https://pods.io/friends-of-pods/
 Requires at least: 3.8
-Tested up to: 4.6
-Stable tag: 0.2.0
+Tested up to: 4.7.5
+Stable tag: 3.0
 License: GPL v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -31,8 +31,8 @@ OR you can just install it with WordPress by going to Plugins >> Add New >> and 
 1. An example of Pods activity being displayed in Stream
 
 == Changelog ==
-= 0.2 - October 6th, 2016 =
-* Fixed: Added compatibility fixes to support Stream 3.0+ which will now be required
+= 3.0 - May XX, 2017 =
+* Fixed: Add compatibility fixes to support Stream 3.0+ which will now be required.
 
 = 0.1 =
 * First WPORG release.

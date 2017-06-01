@@ -3,7 +3,7 @@ Contributors: sc0ttkclark, nikv
 Tags: stream, pods
 Donate link: https://pods.io/friends-of-pods/
 Requires at least: 3.8
-Tested up to: 4.7.5
+Tested up to: 4.8
 Stable tag: 3.0
 License: GPL v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html

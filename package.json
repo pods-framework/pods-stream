@@ -1,7 +1,7 @@
 {
   "name": "pods-stream",
-  "version": "0.1.0",
-  "last_version": "0.0.1",
+  "version": "3.0.0",
+  "last_version": "0.1.0",
   "repository": "https://github.com/pods-framework/pods-stream",
   "devDependencies": {
     "grunt": "^0.4.5",
